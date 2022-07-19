@@ -24,19 +24,22 @@ class DoublyLinkedList:
             self.tail = new_node 
 
     def days_to_sell(self):
-        if self.head is None:
-            print("Linked list is empty")
-            return
         itr = self.tail
         days = 1
-        while itr:
-            if itr >= itr.prev:
-                days >= 1
-            
+        while itr.prev:
+            if itr.data >= itr.prev.data:
+                days += 1
+                itr = itr.prev
+            else:
+                return
+
+        print(days)
+
+
  
 ll = DoublyLinkedList()
 ll.push_back(1)
 ll.push_back(2)
 ll.push_back(3)
 ll.push_back(4)
-ll.print()
+ll.days_to_sell()
