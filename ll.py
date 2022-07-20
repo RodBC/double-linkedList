@@ -23,23 +23,28 @@ class DoublyLinkedList:
             new_node.next = None
             self.tail = new_node 
 
-    def days_to_sell(self):
+    def days_to_sell(self, days):
         itr = self.tail
-        days = 1
-        while itr.prev:
-            if itr.data >= itr.prev.data:
+        prevItr = self.tail
+        if itr.prev and itr.data < itr.prev.data:
+            return 1
+        while prevItr.prev:
+            if itr.data >= prevItr.prev.data:
                 days += 1
-                itr = itr.prev
+                prevItr = prevItr.prev
             else:
-                return
-
-        print(days)
-
-
- 
-ll = DoublyLinkedList()
-ll.push_back(1)
-ll.push_back(2)
-ll.push_back(3)
-ll.push_back(4)
-ll.days_to_sell()
+                return days
+        return days
+        
+n_commands = int(input()) # ex:20
+linkedList = DoublyLinkedList()
+for x in range(n_commands):
+  entrada = input().split()
+  if entrada[0]!= 'INFO':
+    valor = entrada[1]
+    linkedList.push_back(int(entrada[1]))
+    days = linkedList.days_to_sell(1)
+    
+  else:
+    print(f'O ULTIMO VALOR FOI {valor} E HOJE E UM BOM DIA PARA VENDER ACOES DOS ULTIMOS {days} DIAS')
+    
