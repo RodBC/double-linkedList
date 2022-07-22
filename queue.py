@@ -1,15 +1,34 @@
-class Q:
-    def __init__(self):
-        self.front = None
-        self.rear = None
-        self.nums = None
-    def circular(self, initialValue):
-        self.front = self.rear = -1
-        self.nums = initialValue
-        print(self.rear)
-queue = Q()
+class Node:
+    def __init__(self, value):
+        self.value = value
+        self.next = None
 
-a = 1
-b = 2
-pausa = a < 2
-print(pausa)
+class Queue:
+    def __init__(self, value):
+        new_node = Node(value)
+        self.first = new_node
+        self.last = new_node
+        self.length = 1
+    
+    def enqueue(self, value):
+        new_node = Node(value)
+        if not self.first:
+            self.first = new_node
+            self.last = new_node
+        else:
+            self.last.next = new_node
+            self.last = new_node
+        self.length += 1
+
+    def print_queue(self):
+        temp = self.first
+        while temp:
+            print(temp.value)
+            temp = temp.next
+
+class Info:
+    caixa = 1
+info = Info()
+# print(info.caixa)
+q = Queue(info.caixa)
+q.print_queue()
