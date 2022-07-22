@@ -1,34 +1,60 @@
+
 class Node:
-    def __init__(self, value):
-        self.value = value
-        self.next = None
+  def __init__(self, data):
+    self.data = data 
+    self.next = None 
+    self.prev = None 
 
 class Queue:
-    def __init__(self, value):
-        new_node = Node(value)
-        self.first = new_node
-        self.last = new_node
-        self.length = 1
-    
-    def enqueue(self, value):
-        new_node = Node(value)
-        if not self.first:
-            self.first = new_node
-            self.last = new_node
+    def __init__(self):
+        self.head = None 
+        self.tail = None
+        self.length = 0
+
+    def enqueue(self, data):
+        node = Node(data)
+        if self.length == 0:
+            self.head = node
+            self.tail = node
+            self.head.next = None
+            self.length += 1
+            
+        elif self.length == 1:
+            self.tail = node
+            self.head.next = node
+            self.length += 1 
         else:
-            self.last.next = new_node
-            self.last = new_node
-        self.length += 1
+            self.tail.next = node
+            self.tail = node
+            self.length += 1
 
-    def print_queue(self):
-        temp = self.first
-        while temp:
-            print(temp.value)
-            temp = temp.next
+        
 
-class Info:
-    caixa = 1
-info = Info()
-# print(info.caixa)
-q = Queue(info.caixa)
-q.print_queue()
+    def dequeue(self):
+        if self.head == None:
+            return 'erro'
+        if self.length == 1:
+            self.head = None
+            self.tail = None
+            self.length -= 1
+        if self.length > 1:
+            temp = self.head 
+            self.head = self.head.next
+            self.length -= 1
+        
+
+    def print(self):
+        itr = self.head
+        while itr:
+            print(itr.data)
+            itr = itr.next
+            # itr = itr.next        
+            # self.head = self.head.next
+
+        # if self.tail == None:  
+
+# 'roberto', 'douglas'
+q = Queue()
+q.dequeue()
+q.enqueue('roberto')
+q.print()
