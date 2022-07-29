@@ -1,3 +1,5 @@
+#add: adiciona, 
+#calcula: o valor gasto nas transações entre os timestamps dados
 class Node:
   def __init__(self, timestamp, valor):
     self.timestamp = timestamp
@@ -25,16 +27,40 @@ class Queue:
             self.tail.next = node
             self.tail = node
             
-    def print(self):
+    def print(self, inicio, fim):
         itr = self.head
+        valor = 0
+        quantidade = 0
         while itr:
-            print(itr.valor, 'VALOR', itr.timestamp, 'HORA')
-            itr = itr.next
-
-# 'roberto', 'douglas'
+            if itr.timestamp >= inicio and itr.timestamp <= fim:
+                quantidade += 1
+                valor += itr.valor
+                if itr.next == None:
+                    print(quantidade, valor)
+                    return
+            else:
+                print(quantidade, valor)
+                return
+            itr = itr.next   
+    
+    
+    
+    
+    
+    
+    
+    
+    
 q = Queue()
-q.enqueue('2', 123)
-q.enqueue('4', 321)
-q.enqueue('1', 456)
-q.enqueue('6', 789)
-q.print()
+entradas = int(input())
+
+for x in range(entradas):
+  entrada = input().split()
+  if entrada[0] == 'ADD':
+    timestamp, valor = int(entrada[1]), int(entrada[2])
+    q.enqueue(timestamp, valor)
+  else:
+    inicio, fim = int(entrada[1]), int(entrada[2])
+    q.print(inicio, fim)
+    
+  
